@@ -3,6 +3,9 @@ import { game } from "../../gameController";
 
 import "../../components/button";
 
+import resultadoGanaste from "../../img/resultado-ganaste.png";
+import resultadoPerdiste from "../../img/resultado-perdiste.png";
+
 export function initPageResults(params: { goTo: (path: string) => void }) {
   // Obtener los datos guardados en el state
   const currentState = state.getState();
@@ -24,9 +27,9 @@ export function initPageResults(params: { goTo: (path: string) => void }) {
     (lastGame.myPlay === "papel" && lastGame.computerPlay === "piedra") ||
     (lastGame.myPlay === "tijera" && lastGame.computerPlay === "papel")
   ) {
-    resultado = "src/img/resultado-ganaste.png";
+    resultado = resultadoGanaste;
   } else {
-    resultado = "src/img/resultado-perdiste.png";
+    resultado = resultadoPerdiste;
   }
 
   // Para ganar/perder mostramos la imagen; para empate mostramos texto.
@@ -47,7 +50,7 @@ export function initPageResults(params: { goTo: (path: string) => void }) {
   */
   if (resultado === "Empate") {
     div.classList.add("empate");
-  } else if (resultado === "src/img/resultado-ganaste.png") {
+  } else if (resultado === resultadoGanaste) {
     div.classList.add("ganaste");
   } else {
     div.classList.add("perdiste");
