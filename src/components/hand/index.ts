@@ -76,7 +76,8 @@ class GameHand extends HTMLElement {
 
     </style>
 
-    <img class="${type} ${size}" src="/src/img/${type}.png" alt="${type}">
+    
+<img class="${type} ${size}" src="${import.meta.env.BASE_URL}src/img/${type}.png" alt="${type}">
   `;
   }
 }
