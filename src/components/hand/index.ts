@@ -1,3 +1,7 @@
+import piedra from "../../img/piedra.png";
+import papel from "../../img/papel.png";
+import tijera from "../../img/tijera.png";
+
 type HandType = "piedra" | "papel" | "tijera";
 type HandSize = "home" | "instructions" | "game" | "final";
 
@@ -11,6 +15,12 @@ class GameHand extends HTMLElement {
   render() {
     const type = this.getAttribute("type") as HandType;
     const size = this.getAttribute("size") as HandSize;
+
+    const imagenes = {
+      piedra,
+      papel,
+      tijera,
+    };
 
     this.shadow.innerHTML = `
     <style>
@@ -77,7 +87,8 @@ class GameHand extends HTMLElement {
     </style>
 
     
-<img class="${type} ${size}" src="${import.meta.env.BASE_URL}src/img/${type}.png" alt="${type}">
+
+<img class="${type} ${size}" src="${imagenes[type]}" alt="${type}">
   `;
   }
 }
