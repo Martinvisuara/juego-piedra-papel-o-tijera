@@ -1,6 +1,6 @@
 import { initPageWelcome } from "./pages/welcome/index";
 import { initPageInstructions } from "./pages/instructions/index";
-import { initPageGame} from "./pages/game/index";
+import { initPageGame } from "./pages/game/index";
 import { initPageResults } from "./pages/results/index";
 
 const router = [
@@ -19,12 +19,22 @@ const router = [
   {
     path: /\/results/,
     component: initPageResults,
-  }
+  },
 ];
+const basePath = "/juego-piedra-papel-o-tijera";
+
+function getRoutePath() {
+  if (location.pathname.startsWith(basePath)) {
+    return location.pathname.slice(basePath.length) || "/";
+  }
+  return location.pathname;
+}
 
 export function initRouter(container: Element) {
   function goTo(path: string) {
-    history.pushState({}, "", path);
+    const fullPath = location.hostname === "localhost" ? path : basePath + path;
+
+    history.pushState({}, "", fullPath);
     handleRoute(path);
   }
   function handleRoute(route: string) {
@@ -42,13 +52,15 @@ export function initRouter(container: Element) {
       }
     }
   }
-  if (location.pathname == "/") {
+  const currentPath = getRoutePath();
+
+  if (currentPath == "/") {
     goTo("/welcome");
   } else {
-    handleRoute(location.pathname);
+    handleRoute(currentPath);
   }
 
   window.onpopstate = function () {
-    handleRoute(location.pathname);
+    handleRoute(getRoutePath());
   };
 }
